@@ -1,0 +1,5 @@
+open_weather_map_theme:
+  version: 8.x
+  css:
+    base:
+      css/open_weather_map.css: {}

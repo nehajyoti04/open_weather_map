@@ -1,0 +1,13 @@
+open_weather_map.display_page:
+  path: '/weather'
+  defaults:
+    _controller: '\Drupal\open_weather_map\Controller\WeatherController::build'
+  requirements:
+    _permission: 'access weather page content'
+
+open_weather_map.settings:
+  path: '/admin/config/services/weather'
+  defaults:
+    _form: '\Drupal\open_weather_map\Form\WeatherConfigForm'
+  requirements:
+    _permission: 'access training content'

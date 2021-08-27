@@ -1,0 +1,22 @@
+<?php
+
+// use Drupal\Core\Entity\EntityInterface;
+// use Drupal\open_weather_map\D8ActivityListEvent;
+
+//function open_weather_map_entity_insert(EntityInterface $entity) {
+//  $dispatcher = \Drupal::service('event_dispatcher');
+//  $event = new D8ActivityListEvent($entity);
+//  $dispatcher->dispatch(D8ActivityListEvent::NODE_INSERT, $event);
+//}
+
+/**
+ * Implements hook_theme().
+ */
+function open_weather_map_theme() {
+  return [
+    'open_weather_map' => [
+      'variables' => ['open_weather_map_detail' => NULL],
+    ],
+  ];
+}
+
