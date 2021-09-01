@@ -1,0 +1,5 @@
+open_weather_map.static_content:
+  title: 'Open Weather Map'
+  description: 'Open Weather Map Configuration.'
+  route_name: open_weather_map.settings
+  parent: system.admin_config_services

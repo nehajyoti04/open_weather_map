@@ -1,0 +1,4 @@
+endpoint: 'https://api.openweathermap.org/data/2.5/weather'
+key: 'be306854c8951ab7c36943603da82b4d'
+cityname: 'lagos'
+country_code: 'ng'

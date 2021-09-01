@@ -10,4 +10,4 @@ open_weather_map.settings:
   defaults:
     _form: '\Drupal\open_weather_map\Form\WeatherConfigForm'
   requirements:
-    _permission: 'access training content'
+    _permission: 'administer site configuration'

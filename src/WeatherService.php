@@ -6,10 +6,9 @@ use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\ConfigFactory;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\ClientInterface;
-use Drupal\Core\Url;
 
 /**
- * WeatherService.
+ * Class for WeatherService.
  */
 class WeatherService {
 
@@ -20,6 +19,11 @@ class WeatherService {
    */
   protected $httpClient;
 
+  /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactory
+   */
   protected $configFactory;
 
   /**
@@ -27,6 +31,8 @@ class WeatherService {
    *
    * @param \GuzzleHttp\ClientInterface $http_client
    *   The Guzzle HTTP client.
+   * @param \Drupal\Core\Config\ConfigFactory $configFactory
+   *   The config Factory.
    */
   public function __construct(ClientInterface $http_client, ConfigFactory $configFactory) {
     $this->httpClient = $http_client;
@@ -39,11 +45,12 @@ class WeatherService {
   public function createRequest() {
     $query = [];
     $config = $this->configFactory->get('open_weather_map.settings');
-    $appid_config = $this->configFactory->get('open_weather_map.settings')->get('appid');
-    $query['appid'] = Html::escape($appid_config);
-    // $query['cnt'] = $options['count'];
-    $input_data = Html::escape($config->get('cityname'));
-    $query['q'] = $input_data;
+    $key_config = $this->configFactory->get('open_weather_map.settings')->get('key');
+    $query['appid'] = Html::escape($key_config);
+    $cityname = Html::escape($config->get('cityname'));
+    $country_code = Html::escape($config->get('country_code'));
+
+    $query['q'] = $cityname . "," . $country_code;
     return $query;
   }
 
@@ -52,7 +59,9 @@ class WeatherService {
    */
   public function getWeatherInformation() {
     try {
-      $response = $this->httpClient->request('GET','https://api.openweathermap.org/data/2.5/weather',
+
+      $config = $this->configFactory->get('open_weather_map.settings');
+      $response = $this->httpClient->request('GET', 'https://api.openweathermap.org/data/2.5/weather',
       [
         'query' => $this->createRequest(),
       ]);
